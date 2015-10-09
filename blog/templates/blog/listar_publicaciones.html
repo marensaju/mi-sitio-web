@@ -1,32 +1,13 @@
-{% load staticfiles %}
-<html>
-    <head>
+{% extends "blog/base.html" %}
 
-    <title>Django Marensaju Blog</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{% static "CSS/blog.css" %}">
-    </head>
-    <body>
-      <div class="page-header">
-        <h1><a href="/">Django Marensaju Blog</a></h1>
-    </div>
-    <div class="content container">
-        <div class="row">
-            <div class="col-md-8">
-                {% for post in publicaciones %}
-                    <div class="post">
-                        <div class="date">
-                            {{ post.fecha_publicacion }}
-                        </div>
-                        <h1><a href="">{{ post.titulo }}</a></h1>
-                        <p>{{ post.texto|linebreaks }}</p>
-                    </div>
-                {% endfor %}
+    {% block content %}
+        {% for post in publicaciones %}
+            <div class="post">
+                <div class="date">
+                    {{ post.fecha_publicacion }}
+                </div>
+        <h1><a href="{% url "blog.views.detalle_publicacion" pk=post.pk %}">{{ post.titulo }}</a></h1>
+                <p>{{ post.texto|linebreaks }}</p>
             </div>
-        </div>
-    </div>
-
-    </body>
-</html>
+        {% endfor %}
+    {% endblock content %}
